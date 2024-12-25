@@ -2,7 +2,7 @@ The Pokémon Search App is built with React 19 and styled using Tailwind CSS. It
 
 Step to run the project
 
-1. Take the clone from git repository by using cmd : git clone repo-url
+1. Take the clone from git repository by using cmd : git clone https://github.com/innogentSaurabh/Pokemon-search-app.git
 2. cd pokemon-search-app
 3. npm install
 4. npm start
