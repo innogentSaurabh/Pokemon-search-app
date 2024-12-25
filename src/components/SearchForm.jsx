@@ -21,7 +21,10 @@ const SearchForm = ({ handleSearch, handleFilterPokemon }) => {
     >
       <select
         className="max-h-10 overflow-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg shadow-sm focus:ring-blue-500 focus:border-blue-500 p-2 md:w-52 "
-        onChange={(e) => handleFilterPokemon(e.target.value)}
+        onChange={(e) => {
+          setSearchText("");
+          handleFilterPokemon(e.target.value);
+        }}
       >
         <option value="">Select </option>
         {types.map((type) => (
