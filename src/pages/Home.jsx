@@ -4,6 +4,7 @@ import { getPokemonList, getPokemonListByType } from "../api/pokemonApi";
 import LoadingScreen from "./LoadingScreen";
 import axios from "axios";
 import CardSkeletonLoader from "../components/CardSkeletonLoader";
+import { toast, ToastContainer } from "react-toastify";
 
 const PokemonCard = lazy(() => import("../components/PokemonCard"));
 
@@ -30,6 +31,7 @@ const Home = () => {
       setTotalCount(response.count);
     } catch (err) {
       console.error("Error:", err);
+      toast.error(err.message || "Something went wrong!!");
     } finally {
       setLoading(false);
     }
@@ -68,6 +70,7 @@ const Home = () => {
       setFilteredPokemon(detailedPokemons);
     } catch (err) {
       console.error("Error:", err);
+      toast.error(err.message || "Something went wrong!!");
     } finally {
       setLoading(false);
     }
@@ -97,6 +100,7 @@ const Home = () => {
   const handleFilterPokemon = async (type) => {
     if (type) {
       setSearchQuery("");
+      setPokemonList([]);
       setFilteredPokemon([]);
       setIsFiltering(true);
       try {
@@ -111,6 +115,7 @@ const Home = () => {
         setFilteredPokemon(detailedPokemons);
       } catch (err) {
         console.error("Error:", err);
+        toast.error(err.message || "Something went wrong!!");
       } finally {
         setLoading(false);
       }
@@ -123,6 +128,7 @@ const Home = () => {
 
   return (
     <div>
+      <ToastContainer position="top-right" />
       {loading && <LoadingScreen />}
       <SearchForm
         handleSearch={handleSearch}

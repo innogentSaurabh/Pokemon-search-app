@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getPokemonDetails } from "../api/pokemonApi";
 import LoadingScreen from "./LoadingScreen";
+import { toast } from "react-toastify";
 
 const PokemonDetails = () => {
   const { name } = useParams();
@@ -15,6 +16,7 @@ const PokemonDetails = () => {
       setPokemon(data);
     } catch (err) {
       console.log("error : ", err);
+      toast.error(err.message || "Something went wrong!!");
     } finally {
       setLoading(false);
     }

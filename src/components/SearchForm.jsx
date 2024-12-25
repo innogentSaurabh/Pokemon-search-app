@@ -1,13 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { getPokemonTypes } from "../api/pokemonApi";
+import { toast } from "react-toastify";
 
 const SearchForm = ({ handleSearch, handleFilterPokemon }) => {
   const [types, setTypes] = useState([]);
   const [searchText, setSearchText] = useState("");
 
   const fetchTypes = async () => {
-    const fetchedTypes = await getPokemonTypes();
-    setTypes(fetchedTypes);
+    try {
+      const fetchedTypes = await getPokemonTypes();
+      setTypes(fetchedTypes);
+    } catch (err) {
+      console.log("error", err);
+      toast.error(err.message || "Something went wrong!!");
+    }
   };
 
   useEffect(() => {
@@ -53,7 +59,7 @@ const SearchForm = ({ handleSearch, handleFilterPokemon }) => {
             onClick={() => handleSearch(searchText)}
           >
             <svg
-              class="w-4 h-4"
+              className="w-4 h-4"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -61,9 +67,9 @@ const SearchForm = ({ handleSearch, handleFilterPokemon }) => {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
               />
             </svg>

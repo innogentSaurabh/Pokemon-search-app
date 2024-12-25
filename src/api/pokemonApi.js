@@ -18,6 +18,6 @@ export const getPokemonDetails = async (name) => {
 };
 
 export const getPokemonTypes = async () => {
-  const response = await axios.get(`${API_BASE}/type`);
+  const response = await axios.get(`${API_BASE}/type?limit=100`);
   return response.data.results;
 };
