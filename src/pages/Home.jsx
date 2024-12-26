@@ -125,6 +125,13 @@ const Home = () => {
       fetchPokemon();
     }
   };
+  const showPokemonCards = (pokemon) => {
+    return (
+      <Suspense fallback={<CardSkeletonLoader />}>
+        <PokemonCard key={pokemon.name} pokemon={pokemon} />
+      </Suspense>
+    );
+  };
 
   return (
     <div>
@@ -139,19 +146,11 @@ const Home = () => {
           data-testid="pokemon-list"
           className="pokemon-list container pt-20 pb-10 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 gap-y-10 "
         >
-          <Suspense fallback={<CardSkeletonLoader />}>
-            {isFiltering
-              ? filteredPokemon.map((pokemon) => (
-                  <PokemonCard key={pokemon.name} pokemon={pokemon} />
-                ))
-              : searchQuery
-              ? filteredPokemon.map((pokemon) => (
-                  <PokemonCard key={pokemon.name} pokemon={pokemon} />
-                ))
-              : pokemonList.map((pokemon) => (
-                  <PokemonCard key={pokemon.name} pokemon={pokemon} />
-                ))}
-          </Suspense>
+          {isFiltering
+            ? filteredPokemon.map((pokemon) => showPokemonCards(pokemon))
+            : searchQuery
+            ? filteredPokemon.map((pokemon) => showPokemonCards(pokemon))
+            : pokemonList.map((pokemon) => showPokemonCards(pokemon))}
         </div>
       ) : (
         <div className="text-primary pt-20 text-center">No Pokémon found.</div>
