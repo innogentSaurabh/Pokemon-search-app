@@ -11,13 +11,13 @@ const PokemonCard = lazy(() => import("../components/PokemonCard"));
 const Home = () => {
   const [pokemonList, setPokemonList] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [limit] = useState(500);
   const [totalCount, setTotalCount] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredPokemon, setFilteredPokemon] = useState([]);
   const [isFiltering, setIsFiltering] = useState(false);
+  const limit = 100;
 
-  const fetchPokemon = async (offsetParam = 0, limitParam = 500) => {
+  const fetchPokemon = async (offsetParam = 0, limitParam = 100) => {
     try {
       setLoading(true);
       const response = await getPokemonList(offsetParam, limitParam);
